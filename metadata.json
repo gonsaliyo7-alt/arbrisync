@@ -1,0 +1,7 @@
+{
+  "name": "ArbiSync v9.0 - Institutional PO Terminal",
+  "description": "Next-gen multi-chain imbalance engine. Optimized for Profit Opportunity (PO) detection across EVM ecosystems with atomic strike precision.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}

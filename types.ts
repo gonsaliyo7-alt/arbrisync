@@ -12,6 +12,16 @@ export interface ArbitrageOpportunity {
   liquidity: string;
   gasEstimate: string;
   timestamp: string;
+  buyRouter?: string;
+  sellRouter?: string;
+  quoteSymbol?: string;
+  quoteToken?: string;
+  buyFeeRate?: number;
+  sellFeeRate?: number;
+  isV3Buy?: boolean;
+  isV3Sell?: boolean;
+  poolFeeBuy?: number;
+  poolFeeSell?: number;
 }
 
 export interface WalletState {
@@ -26,6 +36,7 @@ export interface ExecutionLog {
   message: string;
   type: 'info' | 'success' | 'warning' | 'error' | 'sim';
   timestamp: string;
+  details?: any;
 }
 
 export interface SessionStats {

@@ -15,12 +15,54 @@ const getChainColor = (chain: string) => {
   if (c.includes('poly')) return 'text-purple-400 bg-purple-500/10 border-purple-500/20';
   if (c.includes('arbi')) return 'text-blue-400 bg-blue-500/10 border-blue-500/20';
   if (c.includes('base')) return 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20';
+  if (c.includes('op') || c.includes('opti')) return 'text-red-400 bg-red-500/10 border-red-500/20';
+  if (c.includes('linea')) return 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20';
+  if (c.includes('fantom') || c.includes('ftm')) return 'text-pink-400 bg-pink-500/10 border-pink-500/20';
   return 'text-slate-400 bg-slate-500/10 border-slate-500/20';
 };
 
 const OpportunityCard: React.FC<Props> = ({ opp, isSelected, onSelect }) => {
   const isHighYield = opp.imbalancePercentage >= 1.5;
   const chainStyles = getChainColor(opp.chain);
+
+  const addTokenToWallet = async (e: React.MouseEvent, address: string | undefined, symbol: string | undefined) => {
+    e.stopPropagation(); // Evitamos seleccionar la oportunidad al hacer clic
+    
+    if (!address || !symbol) {
+      alert("Dirección o símbolo de token inválidos.");
+      return;
+    }
+    
+    if (!(window as any).ethereum) {
+      alert("Por favor, conecta una billetera compatible con MetaMask para usar esta opción.");
+      return;
+    }
+
+    try {
+      let dec = 18;
+      const sym = symbol.toUpperCase();
+      if (sym.includes('USD') || sym.includes('USDC') || sym.includes('USDT')) {
+        dec = 6;
+      } else if (sym.includes('BTC') || sym.includes('WBTC')) {
+        dec = 8;
+      }
+
+      await (window as any).ethereum.request({
+        method: 'wallet_watchAsset',
+        params: {
+          type: 'ERC20',
+          options: {
+            address: address.trim().toLowerCase(),
+            symbol: symbol,
+            decimals: dec,
+            image: `https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/${symbol.toLowerCase()}.png`
+          },
+        },
+      });
+    } catch (error) {
+      console.error('Error al intentar agregar el token a la wallet:', error);
+    }
+  };
 
   return (
     <div 
@@ -43,6 +85,26 @@ const OpportunityCard: React.FC<Props> = ({ opp, isSelected, onSelect }) => {
             </span>
           </div>
           <span className="text-[7px] text-slate-500 font-bold uppercase tracking-widest">{opp.token.slice(0, 18)}...</span>
+          
+          {/* Botones de MetaMask */}
+          <div className="flex gap-1.5 mt-1">
+            <button
+              onClick={(e) => addTokenToWallet(e, opp.token, opp.symbol)}
+              className="px-2 py-0.5 rounded bg-slate-950/80 hover:bg-blue-500/20 hover:text-blue-300 border border-slate-850 hover:border-blue-500/30 text-slate-400 text-[8.5px] font-black uppercase transition-all duration-200 flex items-center gap-1 select-none"
+              title={`Añadir ${opp.symbol} a MetaMask`}
+            >
+              🦊 +{opp.symbol}
+            </button>
+            {opp.quoteToken && (
+              <button
+                onClick={(e) => addTokenToWallet(e, opp.quoteToken, opp.quoteSymbol || 'USDC')}
+                className="px-2 py-0.5 rounded bg-slate-950/80 hover:bg-blue-500/20 hover:text-blue-300 border border-slate-850 hover:border-blue-500/30 text-slate-400 text-[8.5px] font-black uppercase transition-all duration-200 flex items-center gap-1 select-none"
+                title={`Añadir ${opp.quoteSymbol || 'USDC'} a MetaMask`}
+              >
+                🦊 +{opp.quoteSymbol || 'USDC'}
+              </button>
+            )}
+          </div>
         </div>
         <div className="text-right">
           <div className="text-[7px] font-black text-slate-500 uppercase mb-0.5">Profit Opportunity (PO)</div>

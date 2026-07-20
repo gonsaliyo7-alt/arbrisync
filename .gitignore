@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Sensitive files
+.env
+.env.local
+.env.*.local
+
+# Temp logs and build errors
+build_error.txt
+build_error_2.txt
+compile.log
+*.env
+*.cjs.log

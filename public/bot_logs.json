@@ -1,0 +1,302 @@
+[
+  {
+    "id": "bot-1781465200552-aerh7",
+    "message": "🔵 [BASE V3 BOT] Escaneando DEGEN en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:26:40.552Z"
+  },
+  {
+    "id": "bot-1781465201581-csl9o",
+    "message": "🔵 [BASE V3 BOT] Escaneando BRETT en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:26:41.581Z"
+  },
+  {
+    "id": "bot-1781465202611-8hv34",
+    "message": "🔵 [BASE V3 BOT] Escaneando USDC en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:26:42.611Z"
+  },
+  {
+    "id": "bot-1781465203650-hkx4d",
+    "message": "🔵 [BASE V3 BOT] Escaneando TOSHI en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:26:43.650Z"
+  },
+  {
+    "id": "bot-1781465204704-i1khn",
+    "message": "🔵 [BASE V3 BOT] Escaneando AERO en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:26:44.704Z"
+  },
+  {
+    "id": "bot-1781465205737-uzc25",
+    "message": "🔵 [BASE V3 BOT] Escaneando DEGEN en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:26:45.737Z"
+  },
+  {
+    "id": "bot-1781465206765-rvlfa",
+    "message": "🔵 [BASE V3 BOT] Escaneando BRETT en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:26:46.765Z"
+  },
+  {
+    "id": "bot-1781465207834-wp8oz",
+    "message": "🔵 [BASE V3 BOT] Escaneando USDC en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:26:47.834Z"
+  },
+  {
+    "id": "bot-1781465208865-98u5l",
+    "message": "🔵 [BASE V3 BOT] Escaneando TOSHI en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:26:48.865Z"
+  },
+  {
+    "id": "bot-1781465208904-c3p89",
+    "message": "🔵 [BASE V3 BOT] 🚨 OPORTUNIDAD en TOSHI: AERODROME ($0.0001) ➔ UNISWAP ($0.0001). Spread: 0.78%. Vol: $1800",
+    "type": "success",
+    "timestamp": "2026-06-14T19:26:48.904Z"
+  },
+  {
+    "id": "bot-1781465208906-8c5wl",
+    "message": "🔵 [BASE V3 BOT] ⚡ Simulando TX en Base EVM (Flash Loan)...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:26:48.906Z"
+  },
+  {
+    "id": "bot-1781465209080-pe4by",
+    "message": "🔵 [BASE V3 BOT] ❌ Abortado: Arbitraje no rentable (reversion de seguridad)",
+    "type": "error",
+    "timestamp": "2026-06-14T19:26:49.080Z"
+  },
+  {
+    "id": "bot-1781465210099-ku4ki",
+    "message": "🔵 [BASE V3 BOT] Escaneando AERO en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:26:50.099Z"
+  },
+  {
+    "id": "bot-1781465211135-y0q3z",
+    "message": "🔵 [BASE V3 BOT] Escaneando DEGEN en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:26:51.135Z"
+  },
+  {
+    "id": "bot-1781465212290-5kyte",
+    "message": "🔵 [BASE V3 BOT] Escaneando BRETT en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:26:52.290Z"
+  },
+  {
+    "id": "bot-1781465213319-qtb4w",
+    "message": "🔵 [BASE V3 BOT] Escaneando USDC en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:26:53.319Z"
+  },
+  {
+    "id": "bot-1781465214349-f89st",
+    "message": "🔵 [BASE V3 BOT] Escaneando TOSHI en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:26:54.349Z"
+  },
+  {
+    "id": "bot-1781465215391-0akex",
+    "message": "🔵 [BASE V3 BOT] Escaneando AERO en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:26:55.391Z"
+  },
+  {
+    "id": "bot-1781465216417-u02il",
+    "message": "🔵 [BASE V3 BOT] Escaneando DEGEN en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:26:56.417Z"
+  },
+  {
+    "id": "bot-1781465217439-ae31c",
+    "message": "🔵 [BASE V3 BOT] Escaneando BRETT en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:26:57.439Z"
+  },
+  {
+    "id": "bot-1781465218464-g4jue",
+    "message": "🔵 [BASE V3 BOT] Escaneando USDC en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:26:58.464Z"
+  },
+  {
+    "id": "bot-1781465219622-shv84",
+    "message": "🔵 [BASE V3 BOT] Escaneando TOSHI en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:26:59.622Z"
+  },
+  {
+    "id": "bot-1781465220647-p3r4n",
+    "message": "🔵 [BASE V3 BOT] Escaneando AERO en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:27:00.647Z"
+  },
+  {
+    "id": "bot-1781465220916-6wg68",
+    "message": "🔵 [BASE V3 BOT] 🚨 OPORTUNIDAD en AERO: PANCAKESWAP ($0.3526) ➔ AERODROME ($0.3558). Spread: 0.91%. Vol: $1800",
+    "type": "success",
+    "timestamp": "2026-06-14T19:27:00.916Z"
+  },
+  {
+    "id": "bot-1781465220917-hodp7",
+    "message": "🔵 [BASE V3 BOT] ⚡ Simulando TX en Base EVM (Flash Loan)...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:27:00.917Z"
+  },
+  {
+    "id": "bot-1781465221070-n9vjq",
+    "message": "🔵 [BASE V3 BOT] ❌ Abortado: missing revert data (action=\"estimateGas\", data=null, reason=null, transaction={ \"data\": \"0x82a5a3d1000000000000000000000000940181a94a35a4569e4529a3cdfb74e38fd98631000000000000000000000000420000000000000000000000000000000000000600000000000000000000000000000000000000000000000006f05b59d3b200000000000000000000000000001b81d678ffb9c0263b24a97847620c99d213eb14000000000000000000000000cf77a3ba9a5ca399b7c97c74d54e5b1beb874e4300000000000000000000000000000000000000000000000000000cbba106e0000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000009c40000000000000000000000000000000000000000000000000000000000000bb8000000000000000000000000d0b53d9277642d899df5c87a3966a349a798f224\", \"from\": \"0xcdCFdFc15Eaa8D87cD2D5A345d251d548dFf227a\", \"to\": \"0x3F1972eeaF776916FFbd42139F10b3A1cb513A16\" }, invocation=null, revert=null, code=CALL_EXCEPTION, version=6.13.1)",
+    "type": "error",
+    "timestamp": "2026-06-14T19:27:01.070Z"
+  },
+  {
+    "id": "bot-1781465222079-3rn6f",
+    "message": "🔵 [BASE V3 BOT] Escaneando DEGEN en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:27:02.079Z"
+  },
+  {
+    "id": "bot-1781465223104-w84pv",
+    "message": "🔵 [BASE V3 BOT] Escaneando BRETT en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:27:03.104Z"
+  },
+  {
+    "id": "bot-1781465224126-j5uso",
+    "message": "🔵 [BASE V3 BOT] Escaneando USDC en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:27:04.126Z"
+  },
+  {
+    "id": "bot-1781465225156-vpurz",
+    "message": "🔵 [BASE V3 BOT] Escaneando TOSHI en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:27:05.156Z"
+  },
+  {
+    "id": "bot-1781465225185-15wzy",
+    "message": "🔵 [BASE V3 BOT] 🚨 OPORTUNIDAD en TOSHI: AERODROME ($0.0001) ➔ UNISWAP ($0.0001). Spread: 0.78%. Vol: $1800",
+    "type": "success",
+    "timestamp": "2026-06-14T19:27:05.185Z"
+  },
+  {
+    "id": "bot-1781465225186-y7z2t",
+    "message": "🔵 [BASE V3 BOT] ⚡ Simulando TX en Base EVM (Flash Loan)...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:27:05.186Z"
+  },
+  {
+    "id": "bot-1781465225312-fpzk1",
+    "message": "🔵 [BASE V3 BOT] ❌ Abortado: Arbitraje no rentable (reversion de seguridad)",
+    "type": "error",
+    "timestamp": "2026-06-14T19:27:05.312Z"
+  },
+  {
+    "id": "bot-1781465226324-z1z95",
+    "message": "🔵 [BASE V3 BOT] Escaneando AERO en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:27:06.324Z"
+  },
+  {
+    "id": "bot-1781465227352-cxh1y",
+    "message": "🔵 [BASE V3 BOT] Escaneando DEGEN en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:27:07.352Z"
+  },
+  {
+    "id": "bot-1781465228389-8mfe3",
+    "message": "🔵 [BASE V3 BOT] Escaneando BRETT en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:27:08.389Z"
+  },
+  {
+    "id": "bot-1781465229422-ar2y1",
+    "message": "🔵 [BASE V3 BOT] Escaneando USDC en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:27:09.422Z"
+  },
+  {
+    "id": "bot-1781465230455-24uwn",
+    "message": "🔵 [BASE V3 BOT] Escaneando TOSHI en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:27:10.455Z"
+  },
+  {
+    "id": "bot-1781465231487-a4zhx",
+    "message": "🔵 [BASE V3 BOT] Escaneando AERO en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:27:11.487Z"
+  },
+  {
+    "id": "bot-1781465232517-rlkjm",
+    "message": "🔵 [BASE V3 BOT] Escaneando DEGEN en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:27:12.517Z"
+  },
+  {
+    "id": "bot-1781465233547-oj9di",
+    "message": "🔵 [BASE V3 BOT] Escaneando BRETT en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:27:13.547Z"
+  },
+  {
+    "id": "bot-1781465234690-96jtt",
+    "message": "🔵 [BASE V3 BOT] Escaneando USDC en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:27:14.690Z"
+  },
+  {
+    "id": "bot-1781465235719-tztvv",
+    "message": "🔵 [BASE V3 BOT] Escaneando TOSHI en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:27:15.719Z"
+  },
+  {
+    "id": "bot-1781465236778-1u7pp",
+    "message": "🔵 [BASE V3 BOT] Escaneando AERO en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:27:16.778Z"
+  },
+  {
+    "id": "bot-1781465236799-4kqbz",
+    "message": "🔵 [BASE V3 BOT] 🚨 OPORTUNIDAD en AERO: PANCAKESWAP ($0.3526) ➔ AERODROME ($0.3558). Spread: 0.91%. Vol: $1800",
+    "type": "success",
+    "timestamp": "2026-06-14T19:27:16.799Z"
+  },
+  {
+    "id": "bot-1781465236800-m8p4x",
+    "message": "🔵 [BASE V3 BOT] ⚡ Simulando TX en Base EVM (Flash Loan)...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:27:16.800Z"
+  },
+  {
+    "id": "bot-1781465236960-p7nt5",
+    "message": "🔵 [BASE V3 BOT] ❌ Abortado: missing revert data (action=\"estimateGas\", data=null, reason=null, transaction={ \"data\": \"0x82a5a3d1000000000000000000000000940181a94a35a4569e4529a3cdfb74e38fd98631000000000000000000000000420000000000000000000000000000000000000600000000000000000000000000000000000000000000000006f05b59d3b200000000000000000000000000001b81d678ffb9c0263b24a97847620c99d213eb14000000000000000000000000cf77a3ba9a5ca399b7c97c74d54e5b1beb874e4300000000000000000000000000000000000000000000000000000cbba106e0000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000009c40000000000000000000000000000000000000000000000000000000000000bb8000000000000000000000000d0b53d9277642d899df5c87a3966a349a798f224\", \"from\": \"0xcdCFdFc15Eaa8D87cD2D5A345d251d548dFf227a\", \"to\": \"0x3F1972eeaF776916FFbd42139F10b3A1cb513A16\" }, invocation=null, revert=null, code=CALL_EXCEPTION, version=6.13.1)",
+    "type": "error",
+    "timestamp": "2026-06-14T19:27:16.960Z"
+  },
+  {
+    "id": "bot-1781465237964-6iy38",
+    "message": "🔵 [BASE V3 BOT] Escaneando DEGEN en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:27:17.964Z"
+  },
+  {
+    "id": "bot-1781465238999-cu19x",
+    "message": "🔵 [BASE V3 BOT] Escaneando BRETT en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:27:18.999Z"
+  },
+  {
+    "id": "bot-1781465240036-bnv0c",
+    "message": "🔵 [BASE V3 BOT] Escaneando USDC en Base...",
+    "type": "info",
+    "timestamp": "2026-06-14T19:27:20.036Z"
+  }
+]

@@ -748,73 +748,9 @@ const App: React.FC = () => {
     return () => clearInterval(itv);
   }, []);
 
-  // Poll bot logs from the public/bot_logs.json file and merge them
+  // Session starts with clean log state (live entries only)
   useEffect(() => {
-    let active = true;
-    const fetchBotLogs = async () => {
-      try {
-        const res = await fetch('/bot_logs.json');
-        if (!res.ok) return;
-        const data = await res.json();
-        if (!active || !Array.isArray(data)) return;
-        
-        setLogs(prev => {
-          const allLogsMap = new Map<string, ExecutionLog>();
-          
-          prev.forEach(log => {
-            allLogsMap.set(log.id, log);
-          });
-          
-          data.forEach((log: any) => {
-            let displayTime = log.timestamp;
-            try {
-              if (log.timestamp && log.timestamp.includes('T')) {
-                displayTime = new Date(log.timestamp).toLocaleTimeString();
-              }
-            } catch (e) {}
-            
-            allLogsMap.set(log.id, {
-              id: log.id,
-              message: log.message,
-              type: log.type || 'info',
-              timestamp: displayTime,
-              details: log.details
-            });
-          });
-          
-          const parseToSeconds = (timeStr: string) => {
-            if (!timeStr) return 0;
-            if (timeStr.includes('T') || Date.parse(timeStr)) {
-              return new Date(timeStr).getTime() / 1000;
-            }
-            const parts = timeStr.split(':');
-            if (parts.length >= 2) {
-              const hrs = parseInt(parts[0]) || 0;
-              const mins = parseInt(parts[1]) || 0;
-              const secs = parseInt(parts[2]) || 0;
-              const d = new Date();
-              d.setHours(hrs, mins, secs, 0);
-              return d.getTime() / 1000;
-            }
-            return 0;
-          };
-          
-          const merged = Array.from(allLogsMap.values());
-          return merged
-            .sort((a, b) => parseToSeconds(a.timestamp) - parseToSeconds(b.timestamp))
-            .slice(-100);
-        });
-      } catch (err) {
-        // Silencioso
-      }
-    };
-
-    const interval = setInterval(fetchBotLogs, 3000);
-    fetchBotLogs();
-    return () => {
-      active = false;
-      clearInterval(interval);
-    };
+    setLogs([]);
   }, []);
 
   const calc = useMemo(() => {
@@ -2031,7 +1967,7 @@ const App: React.FC = () => {
             </div>
 
             <div className="flex-1 p-10 overflow-y-auto custom-scrollbar font-mono text-xs space-y-4 bg-slate-950/40">
-              {logs.map(log => {
+              {[...logs].reverse().map(log => {
                 const isExpanded = !!expandedLogIds[log.id];
                 return (
                   <div key={log.id} className="flex flex-col py-3 border-b border-slate-900/40 animate-fade-in group">
@@ -3380,7 +3316,7 @@ const App: React.FC = () => {
                     </div>
                  </div>
                  <div className="flex-1 p-8 font-mono text-[11px] space-y-3.5 overflow-y-auto custom-scrollbar bg-[radial-gradient(circle_at_top_right,rgba(15,23,42,1),transparent)]">
-                    {logs.map(log => (
+                    {[...logs].reverse().slice(0, 30).map(log => (
                       <div key={log.id} className="flex gap-4 animate-fade-in group">
                         <span className="text-slate-800 font-bold tracking-tighter shrink-0">[{log.timestamp}]</span>
                         <span className={`leading-relaxed ${log.type === 'success' ? 'text-emerald-500' : log.type === 'error' ? 'text-red-500' : log.type === 'sim' ? 'text-cyan-400' : log.type === 'warning' ? 'text-amber-500' : 'text-blue-500'}`}>

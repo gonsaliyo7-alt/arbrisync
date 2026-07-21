@@ -1057,6 +1057,8 @@ const App: React.FC = () => {
           setTimeout(() => {
             executeStrike();
           }, 250);
+        } else if (finalOpportunities.length > 0) {
+          addLog(`AUTOPILOT: ${finalOpportunities.length} inbalances analizados en Base, pero tras aplicar Safeguard (gas, slippage 0.20%, comisiones DEX y price impact), la ganancia neta no supera el umbral de seguridad (+$0.15 USD). Esperando movimiento de precio...`, "info");
         }
       }
 

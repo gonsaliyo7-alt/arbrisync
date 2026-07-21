@@ -1573,7 +1573,6 @@ const App: React.FC = () => {
           }
           addLog(`PRE-FLIGHT SUCCESS: Transacción viable. Gas estimado: ${gasEstimate.toString()} unidades.`, 'success');
         } catch (simError: any) {
-          console.error("Fallo de simulación local:", simError);
           const reason = simError.reason || simError.message || "Fallo en la verificación del Smart Contract (la transacción revertirá).";
           
           if (strikePreset === 'adaptive') {

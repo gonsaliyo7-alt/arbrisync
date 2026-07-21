@@ -1502,7 +1502,11 @@ const App: React.FC = () => {
           // Pre-flight simulation
           try {
             if (useFlashLoan) {
-              const loanPool = '0xd0b53D9277642d899DF5C87A3966A349A798F224';
+              // USDC/WETH V3 Pool address dynamic per chain
+              const isArbi = selectedOpp.chain.toLowerCase().includes('arbi') || selectedOpp.chain.includes('42161');
+              const loanPool = isArbi 
+                ? '0xc31e54c7a869e9fcbe814c27a499d3d3ef46d8f8'  // USDC/WETH 0.05% Pool en Arbitrum
+                : '0xd0b53D9277642d899DF5C87A3966A349A798F224'; // USDC/WETH Pool en Base
               gasEstimate = await contract.executeArbitrage.estimateGas(
                 tokenAddr,
                 stableAddr,
@@ -1742,7 +1746,10 @@ const App: React.FC = () => {
         let tx;
         try {
           if (useFlashLoan) {
-            const loanPool = '0xd0b53D9277642d899DF5C87A3966A349A798F224';
+            const isArbi = selectedOpp.chain.toLowerCase().includes('arbi') || selectedOpp.chain.includes('42161');
+            const loanPool = isArbi 
+              ? '0xc31e54c7a869e9fcbe814c27a499d3d3ef46d8f8'  // USDC/WETH Pool en Arbitrum
+              : '0xd0b53D9277642d899DF5C87A3966A349A798F224'; // USDC/WETH Pool en Base
             tx = await contract.executeArbitrage(
               tokenAddr,
               stableAddr,

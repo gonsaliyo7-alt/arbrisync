@@ -21,7 +21,13 @@ if (fs.existsSync(envPath)) {
   });
 }
 
-const ARBITRUM_RPC = process.env.ARBITRUM_RPC || 'https://arb1.arbitrum.io/rpc';
+const RPC_LIST = [
+  'https://arb1.arbitrum.io/rpc',
+  'https://arbitrum-one.publicnode.com',
+  'https://1rpc.io/arb',
+  'https://rpc.ankr.com/arbitrum'
+];
+const ARBITRUM_RPC = process.env.ARBITRUM_RPC || RPC_LIST[0];
 
 const ABI = [
   "constructor()",

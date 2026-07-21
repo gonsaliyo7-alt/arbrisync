@@ -1597,7 +1597,7 @@ const App: React.FC = () => {
           
           if (strikePreset === 'adaptive') {
             gasEstimate = 800000n;
-            addLog(`PRE-FLIGHT WARNING: La simulación falló (revert en testnet). Usando límite de gas adaptativo de 800,000 unidades para bypass de saldo. Razón: ${reason.slice(0, 50)}...`, 'warning');
+            addLog(`PRE-FLIGHT WARNING: La simulación falló (revert). Forzando envío real en modo adaptativo (Oráculo Bypass)... Razón: ${reason.slice(0, 50)}...`, 'warning');
           } else {
             // Poner la oportunidad en cooldown de 2 minutos para evitar bucles de fallos
             cooldownsRef.current[opp.id] = Date.now() + 120 * 1000;

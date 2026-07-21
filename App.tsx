@@ -1644,7 +1644,7 @@ const App: React.FC = () => {
           let maxFee = feeData.gasPrice || parseUnits('30', 'gwei');
           
           if (feeData.maxFeePerGas && feeData.maxPriorityFeePerGas) {
-            const activeGasPriority = (strikePreset === 'safeguard' || strikePreset === 'adaptive') ? 'mev_shield' : gasPriority;
+            const activeGasPriority = (strikePreset === 'safeguard' || strikePreset === 'adaptive') ? 'fast' : gasPriority;
             let priorityFeeBuffer = feeData.maxPriorityFeePerGas;
             let baseFeeMultiplier = 130n;
             
@@ -1670,7 +1670,7 @@ const App: React.FC = () => {
             const baseFeeEstimate = feeData.maxFeePerGas - feeData.maxPriorityFeePerGas;
             maxFee = (baseFeeEstimate * baseFeeMultiplier) / 100n + priorityFeeBuffer;
           } else {
-            const activeGasPriority = (strikePreset === 'safeguard' || strikePreset === 'adaptive') ? 'mev_shield' : gasPriority;
+            const activeGasPriority = (strikePreset === 'safeguard' || strikePreset === 'adaptive') ? 'fast' : gasPriority;
             if (activeGasPriority === 'fast') {
               maxFee = (maxFee * 150n) / 100n;
             } else if (activeGasPriority === 'mev_shield') {

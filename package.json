@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview --port $PORT --host 0.0.0.0",
-    "start": "vite build && serve -s dist -l $PORT",
+    "start": "vite build && vite preview --port $PORT --host 0.0.0.0",
     "bot": "node auto_bot_base.cjs",
     "deploy:base": "node deploy_base_v3_flash.cjs",
     "deploy:arbitrum": "node deploy_arbitrum_v3_flash.cjs"
@@ -16,8 +16,7 @@
     "@google/genai": "^1.33.0",
     "ethers": "6.13.1",
     "react": "^19.2.3",
-    "react-dom": "^19.2.3",
-    "serve": "^14.2.4"
+    "react-dom": "^19.2.3"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

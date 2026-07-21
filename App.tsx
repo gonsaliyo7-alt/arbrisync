@@ -4,7 +4,7 @@ import { ArbitrageOpportunity, WalletState, ExecutionLog } from './types';
 import { scanImbalances, QuotaError } from './services/geminiService';
 import WalletConnector, { switchNetwork, NETWORKS } from './components/WalletConnector';
 import OpportunityCard from './components/OpportunityCard';
-import { BrowserProvider, Contract, parseUnits, formatEther, isAddress, ContractFactory } from 'ethers';
+import { BrowserProvider, JsonRpcProvider, Wallet, Contract, parseUnits, formatEther, isAddress, ContractFactory } from 'ethers';
 import { ARBISYNC_ABI } from './services/contractAbi';
 import { CONTRACT_ABI, CONTRACT_BYTECODE } from './services/compiledContract';
 
@@ -1369,22 +1369,24 @@ const App: React.FC = () => {
       setExecuting(false);
     } else {
       // --- MODO REAL (LIVE TERMINAL) ---
-      addLog(`INIT: Strike de ${selectedOpp.symbol} iniciado (LIVE TERMINAL)`, 'info');
+      addLog(`INIT: Strike de ${opp.symbol} iniciado (LIVE TERMINAL)`, 'info');
       
-      if (!wallet.isConnected || !wallet.address) {
+      const privateKey = (import.meta as any).env?.VITE_PRIVATE_KEY || '';
+      
+      if (!wallet.isConnected && !privateKey) {
         addLog(`ERROR: Wallet no conectada. Debe sincronizar el protocolo primero.`, 'error');
-        alert("Por favor conecta tu wallet de MetaMask antes de ejecutar un Strike en vivo.");
+        if (!isAutopilot) alert("Por favor conecta tu wallet de MetaMask antes de ejecutar un Strike en vivo.");
         setExecuting(false);
         return;
       }
       
-      if (wallet.chainId !== targetChainId) {
-        const targetNet = NETWORKS[targetChainId]?.name || selectedOpp.chain;
+      if (wallet.isConnected && wallet.chainId !== targetChainId && !privateKey) {
+        const targetNet = NETWORKS[targetChainId]?.name || opp.chain;
         addLog(`ERROR: Conflicto de Red. Wallet en Red ID ${wallet.chainId}, Oportunidad requiere ${targetNet} (Red ID ${targetChainId}).`, 'error');
         
         const switchSuccess = await switchNetwork(targetChainId);
         if (!switchSuccess) {
-          cooldownsRef.current[selectedOpp.id] = Date.now() + 60 * 1000; // 1 minute cooldown
+          cooldownsRef.current[opp.id] = Date.now() + 60 * 1000; // 1 minute cooldown
           addLog(`CANCELLED: Cambio de red rechazado. Strike abortado.`, 'warning');
           setExecuting(false);
           return;
@@ -1463,12 +1465,12 @@ const App: React.FC = () => {
         const rpcEndpoint = isArbi ? 'https://arb1.arbitrum.io/rpc' : 'https://mainnet.base.org';
         const provider = new JsonRpcProvider(rpcEndpoint);
         
-        // Firma Autónoma 100% Automática utilizando PRIVATE_KEY de la Wallet
-        const privateKey = (import.meta as any).env?.VITE_PRIVATE_KEY || '8bfad205c8d31e38adb7c00f9d67e7edc2156479c62f5c5c03e2ea1ec8e54856';
+        // Firma Autónoma utilizando VITE_PRIVATE_KEY de variables de entorno de Railway
+        const privateKey = (import.meta as any).env?.VITE_PRIVATE_KEY || '';
         let signer;
-        if (privateKey) {
+        if (privateKey && privateKey.startsWith('0x')) {
           signer = new Wallet(privateKey, provider);
-          addLog(`AUTOPILOT SIGNER: Firma autónoma activada con Wallet Propietaria (${signer.address}). No requiere firmas manuales.`, 'success');
+          addLog(`AUTOPILOT SIGNER: Firma autónoma activa con Wallet Propietaria.`, 'success');
         } else {
           const browserProvider = new BrowserProvider((window as any).ethereum);
           signer = await browserProvider.getSigner();

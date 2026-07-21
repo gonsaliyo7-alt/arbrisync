@@ -1466,12 +1466,17 @@ const App: React.FC = () => {
         const provider = new JsonRpcProvider(rpcEndpoint);
         
         // Firma Autónoma utilizando VITE_PRIVATE_KEY de variables de entorno de Railway
-        const privateKey = (import.meta as any).env?.VITE_PRIVATE_KEY || '';
+        let privateKey = (import.meta as any).env?.VITE_PRIVATE_KEY || '';
+        if (privateKey && !privateKey.startsWith('0x') && privateKey.length === 64) {
+          privateKey = '0x' + privateKey;
+        }
+        
         let signer;
         if (privateKey && privateKey.startsWith('0x')) {
           signer = new Wallet(privateKey, provider);
           addLog(`AUTOPILOT SIGNER: Firma autónoma activa con Wallet Propietaria.`, 'success');
         } else {
+          addLog(`BROADCASTING: Firmando transacción en MetaMask...`, 'info');
           const browserProvider = new BrowserProvider((window as any).ethereum);
           signer = await browserProvider.getSigner();
         }

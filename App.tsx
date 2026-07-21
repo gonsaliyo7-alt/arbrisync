@@ -199,12 +199,12 @@ const getChainGasPriceGwei = (chainKey: string, load: number, priority: 'standar
   if (chainKey.includes('sei') || chainKey.includes('monad') || chainKey.includes('hype')) return 0;
   
   if (chainKey.includes('eth')) return 18 * multiplier;
-  if (chainKey.includes('arbi')) return 0.15 * multiplier;
+  if (chainKey.includes('arbi')) return 0.05 * multiplier; // Reducido de 0.15 a 0.05 Gwei base estimado
   if (chainKey.includes('poly')) return 65 * multiplier;
   if (chainKey.includes('bsc')) return 2.2 * multiplier;
-  if (chainKey.includes('base')) return 0.03 * multiplier;
+  if (chainKey.includes('base')) return 0.01 * multiplier; // Reducido de 0.03 a 0.01 Gwei base estimado
   if (chainKey.includes('avax') || chainKey.includes('avalanche')) return 27 * multiplier;
-  if (chainKey.includes('optimism') || chainKey.includes('op')) return 0.02 * multiplier;
+  if (chainKey.includes('optimism') || chainKey.includes('op')) return 0.015 * multiplier;
   if (chainKey.includes('linea')) return 1.8 * multiplier;
   if (chainKey.includes('fantom') || chainKey.includes('ftm')) return 8 * multiplier;
   if (chainKey.includes('solana')) return 0.00005 * multiplier;

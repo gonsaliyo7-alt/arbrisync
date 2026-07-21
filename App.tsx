@@ -1038,6 +1038,14 @@ const App: React.FC = () => {
           if (cooldownTime && Date.now() < cooldownTime) {
             return false;
           }
+          const isSupportedChain = o.chain.toLowerCase().includes('base') || 
+                                   o.chain.toLowerCase().includes('arbi') || 
+                                   o.chain.includes('8453') || 
+                                   o.chain.includes('42161');
+          if (!isSupportedChain) {
+            return false;
+          }
+
           const v = getOppOptimalVolume(o);
           if (v > 0) {
             optimalV = v;

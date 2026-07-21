@@ -47,10 +47,25 @@ if (!bytecodeMatch) {
 }
 const BYTECODE = bytecodeMatch[1];
 
+const readline = require('readline');
+
+async function askPrivateKey() {
+  const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+  return new Promise(resolve => {
+    rl.question('🔑 Pega tu clave privada para desplegar (no se guardará en ningún archivo): ', (ans) => {
+      rl.close();
+      resolve(ans.trim().replace(/^["']|["']$/g, ''));
+    });
+  });
+}
+
 async function main() {
-  const PRIVATE_KEY = process.env.PRIVATE_KEY;
-  if (!PRIVATE_KEY) {
-    console.error('❌ PRIVATE_KEY no encontrada en .env');
+  let PRIVATE_KEY = await askPrivateKey();
+  if (PRIVATE_KEY && !PRIVATE_KEY.startsWith('0x') && PRIVATE_KEY.length === 64) {
+    PRIVATE_KEY = '0x' + PRIVATE_KEY;
+  }
+  if (!PRIVATE_KEY || !PRIVATE_KEY.startsWith('0x')) {
+    console.error('❌ Clave privada inválida. Asegúrate de pegarla correctamente.');
     process.exit(1);
   }
 

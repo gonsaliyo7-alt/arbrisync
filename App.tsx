@@ -1949,7 +1949,7 @@ const App: React.FC = () => {
             : "Error al enviar la transacción al nodo RPC. Verifica la conexión a la red de MetaMask y que posees suficiente saldo nativo para cubrir el coste de gas."
         };
         
-        cooldownsRef.current[selectedOpp.id] = Date.now() + 60 * 1000; // 1 minute cooldown
+        cooldownsRef.current[opp.id] = Date.now() + 60 * 1000; // 1 minute cooldown
         addLog(`ERROR: ${errorMsg}`, 'error', errorDetails);
         addLog(getRevertExplanation(errorMsg), 'error');
         setLiveStrikesFailed(prev => prev + 1);
@@ -1957,7 +1957,7 @@ const App: React.FC = () => {
           status: 'failed',
           title: '❌ STRIKE LIVE RECHAZADO / FALLIDO',
           reason: `La ejecución de la transacción real falló o fue cancelada. Detalle del error: ${errorMsg}`,
-          details: { chain: selectedOpp.chain }
+          details: { chain: opp.chain }
         });
       } finally {
         setExecuting(false);

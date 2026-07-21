@@ -565,9 +565,9 @@ const App: React.FC = () => {
   const getContractForChain = useCallback((chainName: string) => {
     const c = chainName.toLowerCase();
     if (c.includes('arbi') || c.includes('42161')) {
-      return '0x2d972032bE3DC8c99FE78e7925069DbA551C35A1'; // Contrato Flash Loan en Arbitrum
+      return '0x334474489942Eca6740Ee8d20ea3269Bbf2d66A5'; // Contrato Flash Loan en Arbitrum
     }
-    return '0xC9A3Fb4e6Fa94eC7F3834555e934592a3eF9A21'; // Contrato Flash Loan en Base
+    return '0xE675a861e38147133d81DdC73BB9893a50b18dB8'; // Contrato Flash Loan en Base
   }, []);
   const [minPO, setMinPO] = useState<number>(0.15);
   const [isAutopilot, setIsAutopilot] = useState(false);

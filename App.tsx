@@ -222,7 +222,7 @@ const getOptimalFlashProvider = (chain: string): string => {
   return 'balancer';
 };
 
-const SCAN_INTERVAL_SECONDS = 3; // Toque de magia: Acelerado a 3 segundos para el escaneo instantáneo del oráculo
+const SCAN_INTERVAL_SECONDS = 1; // Oráculo definitivo: Escaneo en tiempo real de 1 segundo de intervalo
 
 const EXPLORERS: { [key: string]: string } = {
   '1': 'https://etherscan.io',
@@ -1034,10 +1034,6 @@ const App: React.FC = () => {
         let optimalV = 0;
         let bestEstNet = 0;
         const profitableOpp = finalOpportunities.find(o => {
-          const cooldownTime = cooldownsRef.current[o.id];
-          if (cooldownTime && Date.now() < cooldownTime) {
-            return false;
-          }
           const isSupportedChain = o.chain.toLowerCase().includes('base') || 
                                    o.chain.toLowerCase().includes('arbi') || 
                                    o.chain.includes('8453') || 

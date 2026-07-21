@@ -59,6 +59,8 @@ export default defineConfig(({ mode }) => {
       ],
       define: {
         'import.meta.env.VITE_PRIVATE_KEY': JSON.stringify(process.env.PRIVATE_KEY || process.env.VITE_PRIVATE_KEY || env.PRIVATE_KEY || env.VITE_PRIVATE_KEY || ''),
+        'import.meta.env.VITE_RPC_URL': JSON.stringify(process.env.RPC_URL || process.env.VITE_RPC_URL || env.RPC_URL || env.VITE_RPC_URL || ''),
+        'import.meta.env.VITE_ARBITRUM_RPC_URL': JSON.stringify(process.env.ARBITRUM_RPC_URL || process.env.VITE_ARBITRUM_RPC_URL || env.ARBITRUM_RPC_URL || env.VITE_ARBITRUM_RPC_URL || ''),
         'process.env': {},
         'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY || ''),
         'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY || '')

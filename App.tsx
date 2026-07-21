@@ -1462,7 +1462,19 @@ const App: React.FC = () => {
 
         addLog(`CONNECTING: Conectando con el Smart Contract en ${contractAddrVal}...`, 'info');
         const isArbi = opp.chain.toLowerCase().includes('arbi') || opp.chain.includes('42161');
-        const rpcEndpoint = isArbi ? 'https://arb1.arbitrum.io/rpc' : 'https://mainnet.base.org';
+        
+        let rpcEndpoint = isArbi ? 'https://arb1.arbitrum.io/rpc' : 'https://mainnet.base.org';
+        const privateArbiRpc = (import.meta as any).env?.VITE_ARBITRUM_RPC_URL;
+        const privateBaseRpc = (import.meta as any).env?.VITE_RPC_URL;
+
+        if (isArbi && privateArbiRpc) {
+          rpcEndpoint = privateArbiRpc;
+          addLog(`NODE RPC: Utilizando nodo privado dedicado de Alchemy (Arbitrum).`, 'success');
+        } else if (!isArbi && privateBaseRpc) {
+          rpcEndpoint = privateBaseRpc;
+          addLog(`NODE RPC: Utilizando nodo privado dedicado de Alchemy (Base).`, 'success');
+        }
+        
         const provider = new JsonRpcProvider(rpcEndpoint);
         
         // Firma Autónoma utilizando VITE_PRIVATE_KEY de variables de entorno de Railway

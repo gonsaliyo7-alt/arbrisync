@@ -14,6 +14,9 @@ export default defineConfig(({ mode }) => {
         host: '0.0.0.0',
         allowedHosts: true,
       },
+      define: {
+        'import.meta.env.VITE_PRIVATE_KEY': JSON.stringify(process.env.PRIVATE_KEY || process.env.VITE_PRIVATE_KEY || env.PRIVATE_KEY || env.VITE_PRIVATE_KEY || '')
+      },
       plugins: [
         react(),
         {

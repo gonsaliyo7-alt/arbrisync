@@ -547,7 +547,7 @@ const App: React.FC = () => {
   const [liveGasSpent, setLiveGasSpent] = useState<number>(() => parseFloat(localStorage.getItem('arbisync_live_gas_spent') || '0'));
 
   const [tradeAmountUSD, setTradeAmountUSD] = useState<string>('150');
-  const [selectedChainId, setSelectedChainId] = useState<string>('8453,42161'); // Base & Arbitrum simultáneos
+  const [selectedChainId, setSelectedChainId] = useState<string>('all'); // Escaneo global multicadena por defecto
   const [targetTokens, setTargetTokens] = useState<string>(() => localStorage.getItem('arbisync_target_tokens') || '');
   const [flashProviderId, setFlashProviderId] = useState('auto');
   const [gasPriority, setGasPriority] = useState<'standard' | 'fast' | 'mev_shield'>(() => (localStorage.getItem('arbisync_gas_priority') || 'standard') as any);

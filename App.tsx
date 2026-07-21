@@ -952,7 +952,7 @@ const App: React.FC = () => {
     
     const net = gross - gasEst - flashFee - swapFees - priceImpactUSD - slippageUSD;
     
-    return net > 0.80 ? optimalV : 0; // Exigir al menos $0.80 de beneficio neto
+    return net > 0.05 ? optimalV : 0; // Exigir solo +$0.05 de beneficio neto positivo tras descontar costes
   }, [strikePreset, gasPriority, slippage, flashProviderId, networkLoad]);
 
   const runScanner = useCallback(async () => {
@@ -999,8 +999,8 @@ const App: React.FC = () => {
         setNetworkOppCounts(prev => {
           const updated = { ...prev };
           finalOpportunities.forEach(o => {
-            const chainId = getChainIdByName(o.chain);
-            updated[chainId] = (updated[chainId] || 0) + 1;
+            const chainKey = o.chain.toLowerCase();
+            updated[chainKey] = (updated[chainKey] || 0) + 1;
           });
           return updated;
         });
@@ -1033,6 +1033,7 @@ const App: React.FC = () => {
       // Autopilot Auto-trigger logic
       if (isAutopilot && !executing) {
         let optimalV = 0;
+        let bestEstNet = 0;
         const profitableOpp = finalOpportunities.find(o => {
           const cooldownTime = cooldownsRef.current[o.id];
           if (cooldownTime && Date.now() < cooldownTime) {
@@ -1049,13 +1050,14 @@ const App: React.FC = () => {
         if (profitableOpp && optimalV > 0) {
           setExecuting(true); // Bloquear ejecuciones paralelas inmediatamente
           setTradeAmountUSD(optimalV.toString());
-          addLog(`AUTOPILOT: ¡Oportunidad rentable detectada en ${profitableOpp.symbol}! Monto optimizado automáticamente a $${optimalV} USD para asegurar beneficio neto positivo.`, "success");
+          addLog(`AUTOPILOT: ¡Oportunidad rentable detectada en ${profitableOpp.symbol} (${profitableOpp.chain})! Ganancia neta est: >+$0.05 USD. Lanzando Strike...`, "success");
           setSelectedOpp(profitableOpp);
           setTimeout(() => {
             executeStrike();
-          }, 250);
+          }, 200);
         } else if (finalOpportunities.length > 0) {
-          addLog(`AUTOPILOT: ${finalOpportunities.length} inbalances analizados en Base, pero tras aplicar Safeguard (gas, slippage 0.20%, comisiones DEX y price impact), la ganancia neta no supera el umbral de seguridad (+$0.15 USD). Esperando movimiento de precio...`, "info");
+          const topOpp = finalOpportunities[0];
+          addLog(`AUTOPILOT: Analizados ${finalOpportunities.length} inbalances (${topOpp.symbol} +${topOpp.imbalancePercentage.toFixed(2)}%). Tras restar comisiones DEX (0.6%), slippage (0.2%) y gas, la ganancia neta estimada queda por debajo de +$0.05 USD. Esperando desbalance mayor...`, "info");
         }
       }
 
@@ -3709,9 +3711,9 @@ const App: React.FC = () => {
                   ) : (
                     <button 
                       onClick={executeStrike}
-                      disabled={executing || !calc.isProfitable}
+                      disabled={executing}
                       className={`mt-10 w-full py-8 rounded-[2rem] font-black text-3xl uppercase italic transition-all relative overflow-hidden group tracking-tighter active:scale-95 ${
-                        !calc.isProfitable ? 'bg-slate-900 text-slate-700 cursor-not-allowed border border-slate-800 grayscale' : 
+                        executing ? 'bg-slate-900 text-slate-700 cursor-not-allowed border border-slate-800 grayscale' : 
                         isPaperTrading ? 'bg-cyan-500 text-black shadow-[0_20px_40px_rgba(6,182,212,0.25)] hover:bg-cyan-400' : 
                         'bg-emerald-500 text-black shadow-[0_20px_40px_rgba(16,185,129,0.25)] hover:bg-emerald-400'
                       }`}

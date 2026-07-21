@@ -896,7 +896,7 @@ const App: React.FC = () => {
   }, [contractChoice]);
 
   const getOppOptimalVolume = useCallback((opp: ArbitrageOpportunity): number => {
-    const activeGasPriority = (strikePreset === 'safeguard' || strikePreset === 'adaptive') ? 'mev_shield' : gasPriority;
+    const activeGasPriority = (strikePreset === 'safeguard' || strikePreset === 'adaptive') ? 'fast' : gasPriority;
     const activeSlippage = (strikePreset === 'safeguard' || strikePreset === 'adaptive') ? 0.20 : slippage;
     const activeFlashProviderId = (strikePreset === 'safeguard' || strikePreset === 'adaptive') ? 'balancer' : flashProviderId;
     
@@ -1117,7 +1117,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (selectedOpp) {
-      const activeGasPriority = (strikePreset === 'safeguard' || strikePreset === 'adaptive') ? 'mev_shield' : gasPriority;
+      const activeGasPriority = (strikePreset === 'safeguard' || strikePreset === 'adaptive') ? 'fast' : gasPriority;
       const activeSlippage = (strikePreset === 'safeguard' || strikePreset === 'adaptive') ? 0.20 : slippage;
       const activeFlashProviderId = (strikePreset === 'safeguard' || strikePreset === 'adaptive') ? 'balancer' : flashProviderId;
       

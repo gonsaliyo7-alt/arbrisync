@@ -32,7 +32,7 @@ for (const envPath of potentialEnvPaths) {
 // === CONFIGURACIÓN BASE NETWORK ===
 const PRIVATE_KEY = process.env.PRIVATE_KEY || "TU_CLAVE_PRIVADA_AQUÍ";
 const RPC_URL = "https://mainnet.base.org";
-const CONTRACT_ADDRESS = (process.env.CONTRACT_ADDRESS || "0x3F1972eeaF776916FFbd42139F10b3A1cb513A16").toLowerCase(); // Direct Arbitrage contract
+const CONTRACT_ADDRESS = (process.env.CONTRACT_ADDRESS || "0xC9A3Fb4e6Fa94eC7F3834555e934592a3eF9A21").toLowerCase();
 const WETH = "0x4200000000000000000000000000000000000006"; // WETH en Base
 const USDC = "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"; // USDC en Base
 

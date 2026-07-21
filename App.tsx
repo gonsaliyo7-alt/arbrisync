@@ -566,10 +566,10 @@ const App: React.FC = () => {
   const getContractForChain = useCallback((chainName: string) => {
     const c = chainName.toLowerCase();
     if (c.includes('arbi') || c.includes('42161')) {
-      return '0x2d972032bE3DC8c99FE78e7925069DbA551C35A1'; // Contrato Flash Loan recién desplegado en Arbitrum
+      return '0x2d972032bE3DC8c99FE78e7925069DbA551C35A1'; // Contrato Flash Loan en Arbitrum
     }
-    return contractAddress || '0xC9A3Fb4e6Fa94eC7F3834555e934592a3eF9A21'; // Contrato Flash Loan en Base
-  }, [contractAddress]);
+    return '0xC9A3Fb4e6Fa94eC7F3834555e934592a3eF9A21'; // Contrato Flash Loan en Base
+  }, []);
   const [minPO, setMinPO] = useState<number>(0.15);
   const [isAutopilot, setIsAutopilot] = useState(false);
   const [useFlashLoan, setUseFlashLoan] = useState<boolean>(() => localStorage.getItem('arbisync_use_flash_loan') !== 'false');
@@ -906,7 +906,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (contractChoice === 'bot') {
-      setContractAddress('0x3F1972eeaF776916FFbd42139F10b3A1cb513A16');
+      setContractAddress('0xC9A3Fb4e6Fa94eC7F3834555e934592a3eF9A21');
     }
     localStorage.setItem('arbisync_contract_choice', contractChoice);
   }, [contractChoice]);

@@ -222,7 +222,7 @@ const getOptimalFlashProvider = (chain: string): string => {
   return 'balancer';
 };
 
-const SCAN_INTERVAL_SECONDS = 7; // Set to 7s per user request
+const SCAN_INTERVAL_SECONDS = 3; // Toque de magia: Acelerado a 3 segundos para el escaneo instantáneo del oráculo
 
 const EXPLORERS: { [key: string]: string } = {
   '1': 'https://etherscan.io',
@@ -569,7 +569,7 @@ const App: React.FC = () => {
     }
     return '0xE675a861e38147133d81DdC73BB9893a50b18dB8'; // Contrato Flash Loan en Base
   }, []);
-  const [minPO, setMinPO] = useState<number>(0.15);
+  const [minPO, setMinPO] = useState<number>(0.05); // Filtro ultra-sensible de micro-inbalances
   const [isAutopilot, setIsAutopilot] = useState(true);
   const [useFlashLoan, setUseFlashLoan] = useState<boolean>(() => localStorage.getItem('arbisync_use_flash_loan') !== 'false');
   const [contractChoice, setContractChoice] = useState<'bot' | 'personal'>(() => {

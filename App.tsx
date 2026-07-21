@@ -1515,8 +1515,9 @@ const App: React.FC = () => {
         amountWei = parseUnits(tradeAmountTokens.toFixed(decimals === 6 ? 6 : 9), decimals);
         
         // Evitamos montos negativos en minProfit and convert USD profit to Token profit
-        const minProfitTokens = Math.max(0, calc.net) / quotePrice;
-        minProfitWei = parseUnits(minProfitTokens.toFixed(decimals === 6 ? 6 : 9), decimals);
+        // Oráculo definitivo: Si está en modo adaptativo, forzamos minProfit a 1 wei para permitir que la transacción pase con cualquier ganancia positiva real
+        const minProfitTokens = strikePreset === 'adaptive' ? 0 : (Math.max(0, calc.net) / quotePrice);
+        minProfitWei = strikePreset === 'adaptive' ? 1n : parseUnits(minProfitTokens.toFixed(decimals === 6 ? 6 : 9), decimals);
  
         addLog(`PRE-FLIGHT: Simulando ejecución local en nodo EVM para verificar rentabilidad...`, 'info');
         let gasEstimate: bigint;

@@ -546,7 +546,7 @@ const App: React.FC = () => {
   const [liveNetProfit, setLiveNetProfit] = useState<number>(() => parseFloat(localStorage.getItem('arbisync_live_net_profit') || '0'));
   const [liveGasSpent, setLiveGasSpent] = useState<number>(() => parseFloat(localStorage.getItem('arbisync_live_gas_spent') || '0'));
 
-  const [tradeAmountUSD, setTradeAmountUSD] = useState<string>('100');
+  const [tradeAmountUSD, setTradeAmountUSD] = useState<string>('150');
   const [selectedChainId, setSelectedChainId] = useState<string>('8453,42161'); // Base & Arbitrum simultáneos
   const [targetTokens, setTargetTokens] = useState<string>(() => localStorage.getItem('arbisync_target_tokens') || '');
   const [flashProviderId, setFlashProviderId] = useState('auto');
@@ -570,7 +570,7 @@ const App: React.FC = () => {
     return '0xE675a861e38147133d81DdC73BB9893a50b18dB8'; // Contrato Flash Loan en Base
   }, []);
   const [minPO, setMinPO] = useState<number>(0.15);
-  const [isAutopilot, setIsAutopilot] = useState(false);
+  const [isAutopilot, setIsAutopilot] = useState(true);
   const [useFlashLoan, setUseFlashLoan] = useState<boolean>(() => localStorage.getItem('arbisync_use_flash_loan') !== 'false');
   const [contractChoice, setContractChoice] = useState<'bot' | 'personal'>(() => {
     return (localStorage.getItem('arbisync_contract_choice') || 'bot') as 'bot' | 'personal';
@@ -605,7 +605,7 @@ const App: React.FC = () => {
     };
   }
   const [strikeResult, setStrikeResult] = useState<StrikeResultData | null>(null);
-  const [strikePreset, setStrikePreset] = useState<'custom' | 'safeguard' | 'adaptive'>('safeguard');
+  const [strikePreset, setStrikePreset] = useState<'custom' | 'safeguard' | 'adaptive'>('adaptive');
 
   useEffect(() => {
     localStorage.setItem('arbisync_strike_preset', strikePreset);

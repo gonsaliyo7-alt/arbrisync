@@ -558,6 +558,15 @@ const App: React.FC = () => {
     }
     return saved;
   });
+
+  // Mapeo automático de contratos Flash Loan según la red objetivo
+  const getContractForChain = useCallback((chainName: string) => {
+    const c = chainName.toLowerCase();
+    if (c.includes('arbi') || c.includes('42161')) {
+      return '0x3F1972eeaF776916FFbd42139F10b3A1cb513A16'; // Contrato Flash Loan en Arbitrum
+    }
+    return contractAddress || '0xC9A3Fb4e6Fa94eC7F3834555e934592a3eF9A21'; // Contrato Flash Loan en Base
+  }, [contractAddress]);
   const [minPO, setMinPO] = useState<number>(0.15);
   const [isAutopilot, setIsAutopilot] = useState(false);
   const [useFlashLoan, setUseFlashLoan] = useState<boolean>(() => localStorage.getItem('arbisync_use_flash_loan') !== 'false');
@@ -1396,17 +1405,8 @@ const App: React.FC = () => {
         return;
       }
       
-      let activeContractAddress = contractAddress;
-      const isCustomContract = contractAddress && 
-                               contractAddress.startsWith('0x') && 
-                               contractAddress.length === 42 && 
-                               contractAddress.toLowerCase() !== '0x3f1972eeaf776916ffbd42139f10b3a1cb513a16';
-      
-      if (!isCustomContract) {
-        const sharedAddress = SHARED_PROXY_CONTRACTS[targetChainId] || '0x9c3d4E62F1626f6Fd21e355Db4DFfa405Efa055B';
-        activeContractAddress = sharedAddress;
-        addLog(`PROXY: Usando Smart Contract Proxy Compartido de ArbiSync en ${sharedAddress} (operando con balance de tu wallet).`, 'info');
-      }
+      let activeContractAddress = getContractForChain(selectedOpp.chain);
+      addLog(`CONTRACT: Ejecutando Flash Loan en ${selectedOpp.chain} usando contrato ${activeContractAddress}`, 'info');
       
       let tokenAddr = "";
       let stableAddr = "";

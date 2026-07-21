@@ -874,21 +874,6 @@ const App: React.FC = () => {
       details
     };
     setLogs(prev => [...prev.slice(-50), newLog]);
-
-    // Enviar log al servidor de desarrollo local para guardarlo en un archivo .txt
-    fetch('/api/log', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        sessionId: SESSION_ID,
-        timestamp,
-        type,
-        message,
-        details
-      })
-    }).catch(err => console.error("Error al registrar log en archivo local:", err));
   };
 
   useEffect(() => {

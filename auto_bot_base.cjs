@@ -359,14 +359,22 @@ async function main() {
   }
 
   addBotLog(isPaperMode ? "MODO SIMULACIÓN ACTIVO" : "🟢 MODO REAL OPERATIVO", isPaperMode ? 'warning' : 'success');
-  addBotLog("Iniciando radar en bucle infinito...", 'info');
-
   while (true) {
     for (const token of SCAN_TOKENS) {
       await scanToken(token, isPaperMode);
-      await new Promise(r => setTimeout(r, 1000));
+      await new Promise(r => setTimeout(r, 7000));
     }
   }
 }
 
-main();
+// === SERVIDOR HTTP DUMMY PARA HEALTH CHECKS DE RAILWAY ===
+const http = require('http');
+const PORT = process.env.PORT || 3000;
+http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('ArbiSync Bot Status: OK & Running 24/7');
+}).listen(PORT, () => {
+  console.log(`🌐 Servidor de respuesta web activo en puerto ${PORT}`);
+});
+
+main().catch(console.error);

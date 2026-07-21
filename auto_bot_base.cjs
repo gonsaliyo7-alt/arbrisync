@@ -193,13 +193,19 @@ async function scanToken(symbol, isPaperMode) {
         if (!buyConfig || !sellConfig) continue;
 
         const liqUSD = Math.min(buyPair.liquidity?.usd || 0, sellPair.liquidity?.usd || 0);
-        if (liqUSD < 2000) continue;
+        if (liqUSD < 2000) {
+          addBotLog(`ℹ️ ${symbol}: Desbalance visto (${buyPair.dexId} vs ${sellPair.dexId}), pero liquidez insuficiente ($${Math.round(liqUSD)} < $2000 min). No ejecutado.`, 'info');
+          continue;
+        }
 
         const optimalUSD = calculateOptimalVolume(buyPrice, sellPrice, liqUSD, buyConfig.defaultFee, sellConfig.defaultFee);
         if (optimalUSD > 0) {
           const spreadPct = (((sellPrice - buyPrice) / buyPrice) * 100).toFixed(2);
-          addBotLog(`🚨 OPORTUNIDAD en ${symbol}: ${buyPair.dexId.toUpperCase()} ($${buyPrice.toFixed(4)}) ➔ ${sellPair.dexId.toUpperCase()} ($${sellPrice.toFixed(4)}). Spread: ${spreadPct}%. Vol: $${Math.round(optimalUSD)}`, 'success');
+          addBotLog(`🚨 OPORTUNIDAD RENTABLE en ${symbol}: ${buyPair.dexId.toUpperCase()} ($${buyPrice.toFixed(4)}) ➔ ${sellPair.dexId.toUpperCase()} ($${sellPrice.toFixed(4)}). Spread: ${spreadPct}%. Vol: $${Math.round(optimalUSD)}`, 'success');
           await executeArbitrage(symbol, buyPair, sellPair, optimalUSD, key, isPaperMode);
+        } else {
+          const spreadPct = (((sellPrice - buyPrice) / buyPrice) * 100).toFixed(2);
+          addBotLog(`ℹ️ ${symbol}: Spread de +${spreadPct}% en ${buyPair.dexId} ➔ ${sellPair.dexId}, pero tras deducir comisiones DEX y gas la ganancia neta no alcanza +$0.05. No se envía TX para no perder dinero.`, 'info');
         }
       }
     }

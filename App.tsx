@@ -1397,8 +1397,8 @@ const App: React.FC = () => {
         return;
       }
       
-      let activeContractAddress = getContractForChain(selectedOpp.chain);
-      addLog(`CONTRACT: Ejecutando Flash Loan en ${selectedOpp.chain} usando contrato ${activeContractAddress}`, 'info');
+      let activeContractAddress = getContractForChain(opp.chain);
+      addLog(`CONTRACT: Ejecutando Flash Loan en ${opp.chain} usando contrato ${activeContractAddress}`, 'info');
       
       let tokenAddr = "";
       let stableAddr = "";
@@ -1413,16 +1413,16 @@ const App: React.FC = () => {
       let poolFeeSell = 3000;
 
       try {
-        const buyRouter = selectedOpp.buyRouter || "0xE592427A0AEce92De3Edee1F18E0157C05861564";
-        const sellRouter = selectedOpp.sellRouter || "0xE592427A0AEce92De3Edee1F18E0157C05861564";
-        const stableToken = selectedOpp.quoteToken || "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48";
+        const buyRouter = opp.buyRouter || "0xE592427A0AEce92De3Edee1F18E0157C05861564";
+        const sellRouter = opp.sellRouter || "0xE592427A0AEce92De3Edee1F18E0157C05861564";
+        const stableToken = opp.quoteToken || "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48";
 
-        isV3Buy = selectedOpp.isV3Buy !== undefined ? selectedOpp.isV3Buy : false;
-        isV3Sell = selectedOpp.isV3Sell !== undefined ? selectedOpp.isV3Sell : false;
-        poolFeeBuy = selectedOpp.poolFeeBuy !== undefined ? selectedOpp.poolFeeBuy : 3000;
-        poolFeeSell = selectedOpp.poolFeeSell !== undefined ? selectedOpp.poolFeeSell : 3000;
+        isV3Buy = opp.isV3Buy !== undefined ? opp.isV3Buy : false;
+        isV3Sell = opp.isV3Sell !== undefined ? opp.isV3Sell : false;
+        poolFeeBuy = opp.poolFeeBuy !== undefined ? opp.poolFeeBuy : 3000;
+        poolFeeSell = opp.poolFeeSell !== undefined ? opp.poolFeeSell : 3000;
 
-        tokenAddr = selectedOpp.token.trim().toLowerCase();
+        tokenAddr = opp.token.trim().toLowerCase();
         stableAddr = stableToken.trim().toLowerCase();
         buyRouterAddr = buyRouter.trim().toLowerCase();
         sellRouterAddr = sellRouter.trim().toLowerCase();
@@ -1461,7 +1461,7 @@ const App: React.FC = () => {
         }
 
         addLog(`CONNECTING: Conectando con el Smart Contract en ${contractAddrVal}...`, 'info');
-        const isArbi = selectedOpp.chain.toLowerCase().includes('arbi') || selectedOpp.chain.includes('42161');
+        const isArbi = opp.chain.toLowerCase().includes('arbi') || opp.chain.includes('42161');
         const rpcEndpoint = isArbi ? 'https://arb1.arbitrum.io/rpc' : 'https://mainnet.base.org';
         const provider = new JsonRpcProvider(rpcEndpoint);
         
@@ -1477,10 +1477,10 @@ const App: React.FC = () => {
         }
         const contract = new Contract(contractAddrVal, ARBISYNC_ABI, signer);
         
-        const quoteSym = selectedOpp.quoteSymbol || '';
+        const quoteSym = opp.quoteSymbol || '';
         const decimals = quoteSym.includes('USD') || quoteSym.includes('USDC') || quoteSym.includes('USDT') ? 6 : 18;
         
-        const chainKey = selectedOpp.chain.toLowerCase();
+        const chainKey = opp.chain.toLowerCase();
         let nativePrice = 3000;
         for (const key in NATIVE_PRICES) {
           if (chainKey.includes(key)) {
@@ -1504,7 +1504,7 @@ const App: React.FC = () => {
           try {
             if (useFlashLoan) {
               // USDC/WETH V3 Pool address dynamic per chain
-              const isArbi = selectedOpp.chain.toLowerCase().includes('arbi') || selectedOpp.chain.includes('42161');
+              const isArbi = opp.chain.toLowerCase().includes('arbi') || opp.chain.includes('42161');
               const loanPool = isArbi 
                 ? '0xc31e54c7a869e9fcbe814c27a499d3d3ef46d8f8'  // USDC/WETH 0.05% Pool en Arbitrum
                 : '0xd0b53D9277642d899DF5C87A3966A349A798F224'; // USDC/WETH Pool en Base
@@ -1826,7 +1826,7 @@ const App: React.FC = () => {
           addLog(`GAS: Usado: ${receipt.gasUsed.toString()} unidades.`, 'info');
           
           const connectedNetName = NETWORKS[wallet.chainId?.toString() || '']?.name || `Red ID ${wallet.chainId}`;
-          const executionNetName = selectedOpp.chain;
+          const executionNetName = opp.chain;
           
           addLog(`[INFORME DIAGNÓSTICO EN VIVO]`, 'info');
           addLog(`📡 RED CONECTADA EN WALLET: ${connectedNetName}`, 'info');
@@ -1875,8 +1875,8 @@ const App: React.FC = () => {
           setStrikeResult({
             status: 'success',
             title: '🚀 STRIKE EN VIVO MINADO CON ÉXITO',
-            reason: `¡La transacción real ha sido minada con éxito en la red ${selectedOpp.chain}! Se ejecutaron los swaps en caliente y los fondos netos resultantes fueron depositados en tu dirección de wallet. Hash: ${tx.hash.slice(0, 10)}...`,
-            details: { hash: tx.hash, chain: selectedOpp.chain }
+            reason: `¡La transacción real ha sido minada con éxito en la red ${opp.chain}! Se ejecutaron los swaps en caliente y los fondos netos resultantes fueron depositados en tu dirección de wallet. Hash: ${tx.hash.slice(0, 10)}...`,
+            details: { hash: tx.hash, chain: opp.chain }
           });
         } else {
           const errorDetails = {
@@ -1901,7 +1901,7 @@ const App: React.FC = () => {
             solution: "La transacción fue enviada pero el contrato revertió en cadena. Esto puede debido a un deslizamiento (slippage) repentino en el pool o a cambios de precio en el bloque de minado."
           };
           
-          cooldownsRef.current[selectedOpp.id] = Date.now() + 120 * 1000; // 2 minutes cooldown
+          cooldownsRef.current[opp.id] = Date.now() + 120 * 1000; // 2 minutes cooldown
           addLog(`REVERTED: La transacción falló (revertida en cadena).`, 'error', errorDetails);
           setLiveStrikesFailed(prev => prev + 1);
           setLiveGasSpent(prev => prev + calc.gas);
@@ -1909,7 +1909,7 @@ const App: React.FC = () => {
             status: 'failed',
             title: '❌ ERROR EN EJECUCIÓN LIVE',
             reason: `La transacción real fue enviada pero el smart contract de arbitraje revertió la ejecución en cadena. La pérdida de capital principal fue bloqueada, pero se consumió el gas del envío. Hash: ${tx.hash.slice(0, 10)}...`,
-            details: { hash: tx.hash, chain: selectedOpp.chain }
+            details: { hash: tx.hash, chain: opp.chain }
           });
         }
         

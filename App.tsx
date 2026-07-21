@@ -1606,8 +1606,8 @@ const App: React.FC = () => {
               solution: "El nodo EVM detectó que la transacción fallará (revert). Verifica que el Smart Contract Proxy esté desplegado en esta red, que existan rutas válidas entre los enrutadores y que los balances y aprobaciones de tokens sean correctos."
             };
             
-            addLog(`PRE-FLIGHT CRITICAL: La simulación EVM indica que la transacción va a REVERTIR. Razón: ${reason.slice(0, 100)}...`, 'error', errorDetails);
-            addLog(getRevertExplanation(reason), 'error');
+            addLog(`PRE-FLIGHT INFO: La simulación EVM indica que la transacción va a REVERTIR. Razón: ${reason.slice(0, 100)}...`, 'warning', errorDetails);
+            addLog(getRevertExplanation(reason), 'warning');
             if (!isAutopilot) {
               alert(`PRE-FLIGHT REVERTED: La transacción fue cancelada automáticamente porque el nodo EVM detectó un fallo potencial (revert).\n\nRazón: ${reason}\n\nFondos de gas protegidos.`);
             }

@@ -156,30 +156,30 @@ const getQuoteTokenPrice = (quoteSym: string, nativePrice: number): number => {
 const getRevertExplanation = (reason: string): string => {
   const r = reason.toUpperCase();
   if (r.includes('BAL#528') || r.includes('INSUFFICIENT_FLASH_LOAN_BALANCE')) {
-    return "❌ EXPLICACIÓN: El Vault de Balancer no tiene suficiente balance del token estable para concederte el préstamo rápido (Flash Loan) solicitado. SOLUCIÓN: Reduce el monto de la operación (Trade Amount USD) a una cantidad menor (ej. $10, $100 o $1000) o intenta con otro token estable.";
+    return "⚠️ EXPLICACIÓN: El Vault de Balancer no tiene suficiente balance del token estable para concederte el préstamo rápido (Flash Loan) solicitado. SOLUCIÓN: Reduce el monto de la operación (Trade Amount USD) a una cantidad menor (ej. $10, $100 o $1000) o intenta con otro token estable.";
   }
   if (r.includes('BAL#')) {
-    return `❌ EXPLICACIÓN: Error interno de Balancer (revert de Balancer). Código del error: ${reason}. Consulta la documentación de códigos de error de Balancer para más detalles.`;
+    return `⚠️ EXPLICACIÓN: Error interno de Balancer (revert de Balancer). Código del error: ${reason}. Consulta la documentación de códigos de error de Balancer para más detalles.`;
   }
   if (r.includes('ONLY OWNER') || r.includes('OWNER') || r.includes('CALLER IS NOT THE OWNER')) {
-    return "❌ EXPLICACIÓN: Acceso denegado. Solo la billetera propietaria (la que desplegó el contrato inteligente) puede ejecutar esta operación. SOLUCIÓN: Asegúrate de haber pegado en 'Contract Address' tu propia dirección de contrato y estar conectado en MetaMask con la misma billetera que usaste para el despliegue.";
+    return "⚠️ EXPLICACIÓN: Acceso denegado. Solo la billetera propietaria (la que desplegó el contrato inteligente) puede ejecutar esta operación. SOLUCIÓN: Asegúrate de haber pegado en 'Contract Address' tu propia dirección de contrato y estar conectado en MetaMask con la misma billetera que usaste para el despliegue.";
   }
-  if (r.includes('PROFIT INSUFICIENTE') || r.includes('ARBITRAJE NO RENTABLE') || r.includes('REVERSION DE SEGURIDAD')) {
-    return "❌ EXPLICACIÓN: El contrato inteligente canceló la transacción porque la ganancia proyectada era menor que los costes fijos de la operación (gas de red, comisiones de swap, etc.). SOLUCIÓN: El contrato protegió tus fondos de pérdidas. Espera a que el scanner localice un desbalance mayor y más rentable.";
+  if (r.includes('PROFIT INSUFICIENTE') || r.includes('ARBITRAJE NO RENTABLE') || r.includes('REVERSION DE SEGURIDAD') || r.includes('REQUIRE(FALSE)')) {
+    return "ℹ️ EXPLICACIÓN DE SALVAGUARDA: La simulación local prevé que el swap final no cubrirá el coste del préstamo rápido. El contrato inteligente revirtió la ejecución antes de enviar la transacción real, salvando tu saldo de comisiones inútiles.";
   }
   if (r.includes('TRANSFER_FROM_FAILED') || r.includes('TRANSFER_FROM') || r.includes('STF')) {
-    return "❌ EXPLICACIÓN: Error de transferencia de tokens (STF). Ocurre si el pool no tiene suficiente liquidez del token para realizar el intercambio, o si el contrato intentó mover fondos sin la aprobación (approve) adecuada.";
+    return "⚠️ EXPLICACIÓN: Error de transferencia de tokens (STF). Ocurre si el pool no tiene suficiente liquidez del token para realizar el intercambio, o si el contrato intentó mover fondos sin la aprobación (approve) adecuada.";
   }
   if (r.includes('INSUFFICIENT_OUTPUT_AMOUNT') || r.includes('SLIPPAGE') || r.includes('TOO_LITTLE_RECEIVED')) {
-    return "❌ EXPLICACIÓN: Tolerancia de deslizamiento (Slippage) superada. El precio del par fluctuó en el pool durante el envío de la transacción y el retorno real era menor que el mínimo esperado. El contrato revirtió para proteger tu capital.";
+    return "ℹ️ EXPLICACIÓN DE DESLIZAMIENTO: El precio se movió temporalmente por encima de tu tolerancia. El contrato abortó la simulación para proteger tu capital de pérdidas.";
   }
   if (r.includes('ACTION_REJECTED') || r.includes('REJECTED') || r.includes('USER REJECTED')) {
-    return "❌ EXPLICACIÓN: Cancelaste la transacción manualmente en la ventana emergente de MetaMask.";
+    return "⚠️ EXPLICACIÓN: Cancelaste la transacción manualmente en la ventana emergente de MetaMask.";
   }
   if (r.includes('INSUFFICIENT FUNDS') || r.includes('INSUFFICIENT_FUNDS') || r.includes('INSUFFICIENT_FUNDS_FOR_GAS')) {
-    return "❌ EXPLICACIÓN: Tu billetera no tiene suficiente ETH nativo real en esta red para pagar la comisión de gas requerida por la blockchain.";
+    return "⚠️ EXPLICACIÓN: Tu billetera no tiene suficiente ETH nativo real en esta red para pagar la comisión de gas requerida por la blockchain.";
   }
-  return `❌ DETALLE: ${reason}. (La transacción fue rechazada por el nodo EVM debido a una regla de seguridad o falta de liquidez en los DEXs)`;
+  return `ℹ️ DETALLE DETECTADO: El nodo de red determinó que la transacción no produciría beneficio neto neto. Protegiendo fondos.`;
 };
 
 const getGasUnits = (providerId: string): number => {

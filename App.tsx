@@ -553,7 +553,9 @@ const App: React.FC = () => {
   const [gasPriority, setGasPriority] = useState<'standard' | 'fast' | 'mev_shield'>(() => (localStorage.getItem('arbisync_gas_priority') || 'standard') as any);
   const [contractAddress, setContractAddress] = useState<string>(() => {
     const saved = localStorage.getItem('arbisync_contract_address') || '';
-    if (!saved || saved.toLowerCase() === '0x3f1972eeaf776916ffbd42139F10b3a1cb513a16') {
+    const lower = saved.trim().toLowerCase();
+    if (!saved || lower === '0x3f1972eeaf776916ffbd42139f10b3a1cb513a16' || lower === '0x7ca487dc14ca79d71d757252159537f749e15efa') {
+      localStorage.setItem('arbisync_contract_address', '0xC9A3Fb4e6Fa94eC7F3834555e934592a3eF9A21');
       return '0xC9A3Fb4e6Fa94eC7F3834555e934592a3eF9A21';
     }
     return saved;

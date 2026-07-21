@@ -1449,6 +1449,8 @@ const App: React.FC = () => {
           throw new Error(`Dirección de contrato inválida: "${contractAddrVal}"`);
         }
         if (!isAddress(tokenAddr)) {
+          throw new Error(`Dirección de token objetivo inválida: "${tokenAddr}"`);
+        }
         if (!isAddress(buyRouterAddr)) {
           throw new Error(`Dirección de buy router inválida: "${buyRouterAddr}"`);
         }

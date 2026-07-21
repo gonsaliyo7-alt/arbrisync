@@ -951,7 +951,7 @@ const App: React.FC = () => {
     
     const net = gross - gasEst - flashFee - swapFees - priceImpactUSD - slippageUSD;
     
-    return net > 0.05 ? optimalV : 0; // Exigir solo +$0.05 de beneficio neto positivo tras descontar costes
+    return net > 0.01 ? optimalV : 0; // Exigir solo +$0.01 de beneficio neto positivo tras descontar costes
   }, [strikePreset, gasPriority, slippage, flashProviderId, networkLoad]);
 
   const runScanner = useCallback(async () => {
@@ -1056,7 +1056,7 @@ const App: React.FC = () => {
           }, 100);
         } else if (finalOpportunities.length > 0) {
           const topOpp = finalOpportunities[0];
-          addLog(`AUTOPILOT: Analizados ${finalOpportunities.length} inbalances (${topOpp.symbol} +${topOpp.imbalancePercentage.toFixed(2)}%). Tras restar comisiones DEX (0.6%), slippage (0.2%) y gas, la ganancia neta estimada queda por debajo de +$0.05 USD. Esperando desbalance mayor...`, "info");
+          addLog(`AUTOPILOT: Analizados ${finalOpportunities.length} inbalances (${topOpp.symbol} +${topOpp.imbalancePercentage.toFixed(2)}%). Tras restar comisiones DEX (0.6%), slippage (0.2%) y gas, la ganancia neta estimada queda por debajo de +$0.01 USD. Esperando desbalance mayor...`, "info");
         }
       }
 

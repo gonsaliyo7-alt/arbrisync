@@ -547,22 +547,14 @@ const App: React.FC = () => {
   const [liveGasSpent, setLiveGasSpent] = useState<number>(() => parseFloat(localStorage.getItem('arbisync_live_gas_spent') || '0'));
 
   const [tradeAmountUSD, setTradeAmountUSD] = useState<string>('100');
-  const [selectedChainId, setSelectedChainId] = useState<string>('all'); 
+  const [selectedChainId, setSelectedChainId] = useState<string>('8453'); // Default to Base Network
   const [targetTokens, setTargetTokens] = useState<string>(() => localStorage.getItem('arbisync_target_tokens') || '');
   const [flashProviderId, setFlashProviderId] = useState('auto');
   const [gasPriority, setGasPriority] = useState<'standard' | 'fast' | 'mev_shield'>(() => (localStorage.getItem('arbisync_gas_priority') || 'standard') as any);
   const [contractAddress, setContractAddress] = useState<string>(() => {
     const saved = localStorage.getItem('arbisync_contract_address') || '';
-    if (!saved) return '0x3F1972eeaF776916FFbd42139F10b3A1cb513A16';
-    const lower = saved.trim().toLowerCase();
-    if (
-      lower === '0x7ca487dc14ca79d71d757252159537f749e15efa' ||
-      lower === '0x7cbabfc165e3158fb2ba1e35db4dffa405efa055b' ||
-      lower === '0x447be492ace62079dce429fbf861477298ded699' ||
-      lower === '0x4cdca44c707c1c865b8bb936fb4cc89cb0507d32' ||
-      lower === ''
-    ) {
-      return '0x3F1972eeaF776916FFbd42139F10b3A1cb513A16';
+    if (!saved || saved.toLowerCase() === '0x3f1972eeaf776916ffbd42139F10b3a1cb513a16') {
+      return '0xC9A3Fb4e6Fa94eC7F3834555e934592a3eF9A21';
     }
     return saved;
   });

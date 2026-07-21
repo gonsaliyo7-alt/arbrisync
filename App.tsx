@@ -1743,10 +1743,14 @@ const App: React.FC = () => {
         let tx;
         try {
           if (useFlashLoan) {
-            const isArbi = selectedOpp.chain.toLowerCase().includes('arbi') || selectedOpp.chain.includes('42161');
+            const isArbi = opp.chain.toLowerCase().includes('arbi') || opp.chain.includes('42161');
             const loanPool = isArbi 
               ? '0xc31e54c7a869e9fcbe814c27a499d3d3ef46d8f8'  // USDC/WETH Pool en Arbitrum
               : '0xd0b53D9277642d899DF5C87A3966A349A798F224'; // USDC/WETH Pool en Base
+            
+            // Garantizar 0 ETH en la transacción de Flash Loan
+            delete txOptions.value;
+            
             tx = await contract.executeArbitrage(
               tokenAddr,
               stableAddr,

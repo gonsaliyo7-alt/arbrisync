@@ -563,7 +563,7 @@ const App: React.FC = () => {
   const getContractForChain = useCallback((chainName: string) => {
     const c = chainName.toLowerCase();
     if (c.includes('arbi') || c.includes('42161')) {
-      return '0x3F1972eeaF776916FFbd42139F10b3A1cb513A16'; // Contrato Flash Loan en Arbitrum
+      return '0x2d972032bE3DC8c99FE78e7925069DbA551C35A1'; // Contrato Flash Loan recién desplegado en Arbitrum
     }
     return contractAddress || '0xC9A3Fb4e6Fa94eC7F3834555e934592a3eF9A21'; // Contrato Flash Loan en Base
   }, [contractAddress]);
@@ -1803,8 +1803,9 @@ const App: React.FC = () => {
           }
         }
         
-        addLog(`PENDING: Transacción enviada. Esperando confirmación de bloques... Hash: ${tx.hash.slice(0, 10)}...`, 'info');
-        addLog(`EXPLORER: Seguir transacción -> ${explorerBase}/tx/${tx.hash}`, 'info');
+        addLog(`PENDING: Transacción enviada a la blockchain. Esperando confirmación de bloque...`, 'info');
+        addLog(`HASH DE TRANSACCIÓN: ${tx.hash}`, 'success');
+        addLog(`EXPLORER LINK: ${explorerBase}/tx/${tx.hash}`, 'info');
         
         const receipt = await tx.wait();
         

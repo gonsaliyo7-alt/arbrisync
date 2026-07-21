@@ -349,8 +349,9 @@ export const scanImbalances = async (
     
     // Consultas secuenciales con retardo para evitar bloqueos por burst rate limit (429)
     for (const symbol of symbols) {
+      if (!symbol || !symbol.trim()) continue;
       try {
-        const res = await fetch(`https://api.dexscreener.com/latest/dex/search?q=${symbol}`, {
+        const res = await fetch(`https://api.dexscreener.com/latest/dex/search?q=${encodeURIComponent(symbol.trim())}`, {
           headers: {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
           }

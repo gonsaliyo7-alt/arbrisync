@@ -63,6 +63,7 @@ export const NETWORK_REGISTRY: { [chainId: string]: NetworkConfig } = {
       'pancakeswap v3': '0x1b81D678ffb9C0263b24A97847620C99d213eB14',
       'sushiswap': '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506',
       'camelot': '0xc873fEcbd354f5A56E00E710B90EF4201db2448d',
+      'traderjoe': '0xb482348f95c478a531e21c99d1db9a6444d3d3d3', // TraderJoe V2 Router famoso en Arbitrum
       'balancer': '0xBA12222222228d8Ba445958a75a0704d566BF2C8'
     }
   },
@@ -74,8 +75,11 @@ export const NETWORK_REGISTRY: { [chainId: string]: NetworkConfig } = {
       'uniswap': '0xE592427A0AEce92De3Edee1F18E0157C05861564', // Uniswap V3
       'uniswap v3': '0xE592427A0AEce92De3Edee1F18E0157C05861564',
       'aerodrome': '0xcF77a682147983677C3b8e4e5ee6A00742f1cf5A',
+      'pancakeswap': '0x8c80f4a42ba6539a6af59c963200d74980e4c650', // PancakeSwap V3 famoso en Base
+      'pancakeswap v3': '0x8c80f4a42ba6539a6af59c963200d74980e4c650',
       'sushiswap': '0x6bd237f3747d2a588b39414995f50f38bbf200d7',
-      'baseswap': '0x327ef899140f7d54b4073e7305961b244247c907'
+      'baseswap': '0x327ef899140f7d54b4073e7305961b244247c907',
+      'alienbase': '0x52e58af0e41200000000000000000000000000cf' // AlienBase famoso en Base
     }
   },
   '43114': {
